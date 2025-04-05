@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Invitation — A & D</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(to bottom, #eeedb6, #ffffff);
+      overflow-x: hidden;
+      color: #4f4f4f;
+    }
+
+    h1, h2 {
+      font-family: 'Great Vibes', cursive;
+      text-align: center;
+      color: #6a4e8f;
+      margin: 0.5em 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      position: relative;
+    }
+
+    .section {
+      padding: 80px 20px;
+      position: relative;
+    }
+
+    .side {
+      width: 300px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition: all 1s ease;
+    }
+
+    .left-side {
+      left: -350px;
+      text-align: right;
+    }
+
+    .right-side {
+      right: -350px;
+      text-align: left;
+    }
+
+    .side.visible-left {
+      left: 20px;
+      opacity: 1;
+    }
+
+    .side.visible-right {
+      right: 20px;
+      opacity: 1;
+    }
+
+    .info-box {
+      background-color: rgba(255, 255, 255, 0.75);
+      border-left: 8px solid #8a4517a8;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .dress-code {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .swatch {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin: 0 10px;
+      box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    }
+
+    .form-section {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    input {
+      padding: 10px;
+      margin: 10px;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #8a4517a8;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #28591378;
+    }
+
+    .confetti, .rings {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      display: none;
+      z-index: 999;
+    }
+
+    .confetti::before, .confetti::after {
+      content: "✨✨✨✨✨";
+      font-size: 40px;
+      animation: drop 2s ease-out forwards;
+      color: #8a4517a8;
+    }
+
+    .rings {
+      top: 30%;
+      font-size: 80px;
+      color: gold;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+      animation: pop 2s ease-out forwards;
+    }
+
+    @keyframes drop {
+      0% { transform: translateY(-100px); opacity: 0; }
+      100% { transform: translateY(300px); opacity: 1; }
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .photos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 40px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .photo {
+      width: 250px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    /* Медиа-запросы для мобильных устройств */
+    max-width: 768px {
+      .container {
+        padding: 10px;
+      }
+
+      .photos {
+        flex-direction: column;
+      }
+
+      .photo {
+        width: 90%;
+        margin-bottom: 20px;
+      }
+
+      .side {
+        width: 100%;
+        position: relative;
+        transform: none;
+        top: 0;
+        opacity: 1;
+      }
+
+      .info-box {
+        padding: 15px;
+      }
+
+      input {
+        width: 100%;
+        margin: 5px;
+      }
+
+      button {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+
+      h2 {
+        font-size: 1.5em;
+      }
+
+      /* Добавление отступа между блоками на мобильных устройствах */
+      .left-side, .right-side {
+        position: relative;
+        transform:translateY(0);
+      }
+
+      .left-side {
+        margin-bottom: 30px; /* Отступ между адресом и дресс кодом */
+      }
+    }
+
+    max-width: 480px {
+      .swatch {
+        width: 30px;
+        height: 30px;
+      }
+
+      h1 {
+        font-size: 1.8em;
+      }
+
+      h2 {
+        font-size: 1.3em;
+      }
+
+      .form-section {
+        margin-top: 30px;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>Анастасия & Даниэле</h1>
+    <h2>Свадебное приглашение</h2>
+
+    <!-- Фото -->
+    <div class="photos">
+      <img src="photo1.jpg" alt="Фото 1" class="photo">
+      <img src="photo2.jpg" alt="Фото 2" class="photo">
+      <img src="photo3.jpg" alt="Фото 3" class="photo">
+    </div>
+
+    <div class="section">
+      <div class="side left-side" id="left1">
+        <div class="info-box">
+          <h3>Когда и где</h3>
+          <p><strong>2 августа 2025</strong></p>
+          <p>Роспись — 14:00, ЗАГС
+ул. Свердлова, 21</p>
+          <p>Банкет — 15:00, ресторан «Зимний сад»</p>
+          <p>Город Керчь</p>
+        </div>
+      </div>
+
+      <div class="side right-side" id="right1">
+        <div class="info-box">
+          <h3>Dress Code</h3>
+          <p>Пожалуйста, поддержите стиль свадьбы:</p>
+          <div class="dress-code">
+            <div class="swatch" style="background-color:#8a4517a8;"></div>
+            <div class="swatch" style="background-color:#28591378;"></div>
+            <div class="swatch" style="background-color:#592f138c;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Подтвердите участие</h3>
+      <form action="process.php" method="POST">
+        <input type="text" name="surname" placeholder="Фамилия" required>
+
+        <input type="text" name="name" placeholder="Имя" required>
+
+        <input type="text" name="patronymic" placeholder="Отчество" required>
+
+        <button type="submit">Принимаю приглашение</button>
+      </form>
+    </div>
+
+    <div class="confetti" id="confetti"></div>
+    <div class="rings" id="rings">💍💍</div>
+
+  </div>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const left = document.getElementById('left1');
+      const right = document.getElementById('right1');
+      const triggerPoint = window.innerHeight / 1.3;
+
+      if (left.getBoundingClientRect().top < triggerPoint) {
+        left.classList.add('visible-left');
+      }
+      if (right.getBoundingClientRect().top < triggerPoint) {
+        right.classList.add('visible-right');
+      }
+    });
+  </script>
+
+</body>
+</html>
