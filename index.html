@@ -35,13 +35,6 @@
 
     .side {
       width: 100%;
-      opacity: 0;
-      transition: all 1s ease;
-      margin-bottom: 20px; /* Отступ между блоками */
-    }
-
-    .left-side, .right-side {
-      width: 100%;
       opacity: 1;
       text-align: center;
       margin-bottom: 30px;
@@ -150,17 +143,10 @@
       position: relative;
     }
 
-    /* Для мобильных устройств */
     max-width: 768px {
       .side {
-        opacity: 1;
-        margin-bottom: 30px; /* Убираем наложение блоков */
-        padding: 10px;
-      }
-
-      .left-side, .right-side {
         margin-bottom: 30px;
-        text-align: center;
+        padding: 10px;
       }
 
       .photos {
@@ -173,6 +159,14 @@
         max-width: 300px;
       }
     }
+
+    .thank-you {
+      display: none;
+      text-align: center;
+      margin-top: 30px;
+      font-size: 24px;
+      color: #285913;
+    }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap" rel="stylesheet">
 </head>
@@ -183,7 +177,6 @@
     <h1>Анастасия & Даниэле</h1>
     <h2>Свадебное приглашение</h2>
 
-    <!-- Фото -->
     <div class="photos">
       <img src="photo1.jpg" alt="Фото 1" class="photo">
       <img src="photo2.jpg" alt="Фото 2" class="photo">
@@ -191,18 +184,16 @@
     </div>
 
     <div class="section">
-      <!-- Блок с адресом -->
       <div class="side left-side" id="left1">
         <div class="info-box">
           <h3>Когда и где</h3>
           <p><strong>2 августа 2025</strong></p>
           <p>Роспись — 14:00, ЗАГС ул. Свердлова, 21</p>
-          <p>Банкет — 15:00, ресторан «Зимний сад»</p>
+          <p>Банкет — 15:00,ресторан «Зимний сад»</p>
           <p>Город Керчь</p>
         </div>
       </div>
 
-      <!-- Блок с дресс-кодом -->
       <div class="side right-side" id="right1">
         <div class="info-box">
           <h3>Dress Code</h3>
@@ -220,12 +211,13 @@
 
     <div class="form-section">
       <h3>Подтвердите участие</h3>
-      <form action="process.php" method="POST">
-        <input type="text" name="surname" placeholder="Фамилия" required>
-        <input type="text" name="name" placeholder="Имя" required>
-        <input type="text" name="patronymic" placeholder="Отчество" required>
+      <form id="weddingForm">
+        <input type="text" name="entry.811340032" placeholder="Фамилия" required>
+        <input type="text" name="entry.817871038" placeholder="Имя" required>
+        <input type="text" name="entry.211633864" placeholder="Отчество" required>
         <button type="submit">Принимаю приглашение</button>
       </form>
+      <div class="thank-you" id="thankYou">Спасибо! До встречи на свадьбе!</div>
     </div>
 
     <div class="confetti" id="confetti"></div>
@@ -234,6 +226,23 @@
   </div>
 
   <script>
+    document.getElementById("weddingForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+
+      fetch("https://docs.google.com/forms/d/e/1FAIpQLSeCRpfrTq237DGVLiRtzSjXm7VfiM_Qh0jxidcCrQKqqkGL7w/formResponse", {
+        method: "POST",
+        mode: "no-cors",
+        body: data
+      });
+
+      form.style.display = "none";
+      document.getElementById("thankYou").style.display = "block";
+      document.getElementById("confetti").style.display = "block";
+      document.getElementById("rings").style.display = "block";
+    });
+
     window.addEventListener('scroll', () => {
       const left = document.getElementById('left1');
       const right = document.getElementById('right1');
