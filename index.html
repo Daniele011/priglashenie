@@ -34,32 +34,17 @@
     }
 
     .side {
-      width: 300px;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
+      width: 100%;
       opacity: 0;
       transition: all 1s ease;
+      margin-bottom: 20px; /* Отступ между блоками */
     }
 
-    .left-side {
-      left: -350px;
-      text-align: right;
-    }
-
-    .right-side {
-      right: -350px;
-      text-align: left;
-    }
-
-    .side.visible-left {
-      left: 20px;
+    .left-side, .right-side {
+      width: 100%;
       opacity: 1;
-    }
-
-    .side.visible-right {
-      right: 20px;
-      opacity: 1;
+      text-align: center;
+      margin-bottom: 30px;
     }
 
     .info-box {
@@ -165,19 +150,27 @@
       position: relative;
     }
 
+    /* Для мобильных устройств */
     max-width: 768px {
       .side {
-        position: relative;
         opacity: 1;
-        transform: translateY(0);
-        left: 0;
-        right: 0;
+        margin-bottom: 30px; /* Убираем наложение блоков */
+        padding: 10px;
       }
 
       .left-side, .right-side {
-        position: relative;
+        margin-bottom: 30px;
         text-align: center;
-        margin-bottom: 80px;
+      }
+
+      .photos {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .photo {
+        width: 90%;
+        max-width: 300px;
       }
     }
   </style>
@@ -197,17 +190,19 @@
       <img src="photo3.jpg" alt="Фото 3" class="photo">
     </div>
 
-    <div class="section"><div class="side left-side" id="left1">
+    <div class="section">
+      <!-- Блок с адресом -->
+      <div class="side left-side" id="left1">
         <div class="info-box">
           <h3>Когда и где</h3>
           <p><strong>2 августа 2025</strong></p>
-          <p>Роспись — 14:00, ЗАГС
-ул. Свердлова, 21</p>
+          <p>Роспись — 14:00, ЗАГС ул. Свердлова, 21</p>
           <p>Банкет — 15:00, ресторан «Зимний сад»</p>
           <p>Город Керчь</p>
         </div>
       </div>
 
+      <!-- Блок с дресс-кодом -->
       <div class="side right-side" id="right1">
         <div class="info-box">
           <h3>Dress Code</h3>
@@ -227,11 +222,8 @@
       <h3>Подтвердите участие</h3>
       <form action="process.php" method="POST">
         <input type="text" name="surname" placeholder="Фамилия" required>
-
         <input type="text" name="name" placeholder="Имя" required>
-
         <input type="text" name="patronymic" placeholder="Отчество" required>
-
         <button type="submit">Принимаю приглашение</button>
       </form>
     </div>
